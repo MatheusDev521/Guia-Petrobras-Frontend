@@ -101,6 +101,27 @@ async function gerarPDFDebug() {
   }
 }
 
+const valoresIniciais = {};
+
+campos.forEach(id => {
+  const elemento = document.getElementById(id);
+  if (elemento && elemento.value) {
+    valoresIniciais[id] = elemento.value;
+  }
+});
+
+
 // Event listeners
 document.getElementById('btnGerarPDF').addEventListener('click', gerarPDF);
-document.getElementById('btnDebug').addEventListener('click', gerarPDFDebug);
+document.getElementById('btnLimpar').addEventListener('click', () => {
+  campos.forEach(id => {
+    const elemento = document.getElementById(id);
+    if (!elemento) return;
+
+    if (valoresIniciais[id] !== undefined) {
+      elemento.value = valoresIniciais[id]; // restaura valor fixo
+    } else {
+      elemento.value = ''; // limpa campos livres
+    }
+  });
+});

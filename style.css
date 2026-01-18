@@ -168,40 +168,42 @@ body {
    BOTÕES
 ========================= */
 .formulario button {
-  width: 100%;
-  padding: 15px;
+  width: 40%;
+  padding: 18px;
   margin-top: 22px;
   border: none;
   border-radius: 8px;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: 1px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
-/* BOTÃO PRINCIPAL */
-.btn-primary {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
-  box-shadow: var(--shadow-primary);
+/* BOTÃO GERAR PDF (VERDE) */
+.btn-gerar {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(46, 204, 113, 0.45);
 }
 
-.btn-primary:hover {
+.btn-gerar:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(50, 130, 184, 0.7);
+  box-shadow: 0 0 22px rgba(46, 204, 113, 0.75);
 }
 
-/* BOTÃO DEBUG */
-.btn-debug {
-  background: #111;
-  color: #ccc;
-  font-size: 13px;
-  margin-top: 10px;
+/* BOTÃO LIMPAR FORMULÁRIO (VERMELHO) */
+.btn-limpar {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: #ffffff;
+  font-size: 14px;
+  margin-left: 10px;
+  box-shadow: 0 0 10px rgba(231, 76, 60, 0.4);
 }
 
-.btn-debug:hover {
-  background: #000;
+.btn-limpar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(231, 76, 60, 0.7);
 }
 
 /* =========================
