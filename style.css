@@ -1,0 +1,219 @@
+/* =========================
+   VARIÁVEIS DO TEMA
+========================= */
+:root {
+  --bg-main: #1c1c1c;
+  --bg-secondary: #2a2a2a;
+  --bg-tertiary: #1f1f1f;
+
+  --primary: #3282b8;
+  --primary-dark: #0f4c75;
+
+  --text-main: #f0f0f0;
+  --text-muted: #ccc;
+
+  --border: rgba(255, 255, 255, 0.1);
+
+  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.6);
+  --shadow-primary: 0 0 12px rgba(50, 130, 184, 0.4);
+}
+
+/* =========================
+   RESET
+========================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #141414, #1c1c1c);
+  min-height: 100vh;
+  padding: 40px 20px;
+  color: var(--text-main);
+}
+
+/* =========================
+   CONTAINER
+========================= */
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+.formulario {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--bg-secondary);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
+}
+
+/* =========================
+   TÍTULO
+========================= */
+.formulario h2 {
+  grid-column: 1 / -1;
+  background: none;
+  color: var(--primary);
+  padding: 0 0 14px 0;
+  margin: 25px 30px 30px 30px;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+
+  border-bottom: 3px solid rgba(255, 255, 255, 0.12);
+}
+
+.formulario h2 img {
+  max-height: 65px;
+}
+
+/* =========================
+   COLUNAS
+========================= */
+#BeneficiarioMedico,
+#AtendimentoProcedimento {
+  padding: 30px;
+}
+
+#BeneficiarioMedico {
+  border-right: 1px solid var(--border);
+}
+
+#AtendimentoProcedimento {
+  background: var(--bg-tertiary);
+}
+
+/* =========================
+   SEÇÕES
+========================= */
+.formulario h3 {
+  margin-bottom: 18px;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: var(--primary);
+  letter-spacing: 1px;
+  padding-left: 12px;
+  border-left: 4px solid var(--primary);
+}
+
+/* =========================
+   LABELS
+========================= */
+.formulario label {
+  display: block;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+/* =========================
+   INPUTS
+========================= */
+.formulario input,
+.formulario select,
+.formulario textarea {
+  width: 100%;
+  padding: 12px;
+  background: #2f2f2f;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-main);
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.formulario input:focus,
+.formulario select:focus,
+.formulario textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-primary);
+}
+
+.formulario textarea {
+  resize: vertical;
+}
+
+/* =========================
+   SELECT
+========================= */
+.formulario select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Cpath fill='%23ccc' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 35px;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+.formulario button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 22px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* BOTÃO PRINCIPAL */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  box-shadow: var(--shadow-primary);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(50, 130, 184, 0.7);
+}
+
+/* BOTÃO DEBUG */
+.btn-debug {
+  background: #111;
+  color: #ccc;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.btn-debug:hover {
+  background: #000;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+@media (max-width: 900px) {
+  .formulario {
+    grid-template-columns: 1fr;
+  }
+
+  #BeneficiarioMedico {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}

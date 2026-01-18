@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia Petrobras</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+  <!-- FORMULÁRIO -->
+  <div class="formulario">
+    <h2>GERADOR DE GUIA <img src="petro.png" alt=""></h2>
+
+    <div id="BeneficiarioMedico">
+      <h3>Beneficiário</h3>
+      
+      <label for="beneficiario_nome">Nome do Beneficiário:</label>
+      <input id="beneficiario_nome">
+      
+      <label for="numero_carteira">Número da Carteira:</label>
+      <input id="numero_carteira">
+      
+      <label for="atendimento_rn">Atendimento RN:</label>
+      <input id="atendimento_rn" value="N">
+        <br><br><br>
+      <h3>Profissional</h3>
+      <label for="nome_profissional">Nome do Profissional:</label>
+      <select id="nome_profissional">
+        <option value="">Selecione...</option>
+        <option value="Emília Magalhães">Emília Magalhães</option>
+        <option value="Karla Melo">Karla Melo</option>
+        <option value="Paulo Benígno">Paulo Benígno</option>
+      </select>
+
+      <label for="conselho">Conselho Profissional:</label>
+      <input id="conselho" type="text" value="CRM">
+      
+      <label for="numero_conselho">Número no Conselho:</label>
+      <input id="numero_conselho" type="number">
+      
+      <label for="uf_conselho">UF:</label>
+      <input id="uf_conselho" placeholder="Ex: BA">
+      
+      <label for="cbo">Código CBO:</label>
+      <input id="cbo">
+    </div>
+
+    <div id="AtendimentoProcedimento">
+      <h3>Atendimento</h3>
+      
+      <label for="data_atendimento">Data do Atendimento:</label>
+      <input id="data_atendimento" type="date">
+
+      <label for="indicacao_acidente">Indicação de Acidente:</label>
+      <input id="indicacao_acidente" value="N">
+      
+      <label for="tabela">Tabela:</label>
+      <input id="tabela" value="TUSS">
+      
+      <label for="codigo_procedimento">Código do Procedimento:</label>
+      <input id="codigo_procedimento" value="10101012">
+      
+      <label for="valor_procedimento">Valor do Procedimento:</label>
+      <input id="valor_procedimento" value="R$ 112 00">
+        <br><br><br>
+      <h3>Observações</h3>
+      
+      <label for="observacao">Observação/Justificativa:</label>
+      <textarea id="observacao" rows="4"></textarea>
+
+      <button id="btnGerarPDF" class="btn-primary">GERAR PDF</button>
+      <button id="btnDebug" class="btn-debug">Gerar PDF Debug (Régua)</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
