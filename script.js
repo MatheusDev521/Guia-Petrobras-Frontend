@@ -1,3 +1,4 @@
+const API_URL = "https://guia-petrobras-backend.onrender.com";
 // Lista completa de campos
 const campos = [
   "numero_guia_prestador", "numero_guia_operadora",
@@ -44,7 +45,7 @@ async function gerarPDF() {
   }
 
   try {
-    const response = await fetch('/gerar-pdf', {
+    const response = await fetch(`${API_URL}/gerar-pdf`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(dados)
@@ -75,7 +76,7 @@ async function gerarPDF() {
 // Gera PDF de debug com régua
 async function gerarPDFDebug() {
   try {
-    const response = await fetch('/gerar-pdf-debug', {
+    const response = await fetch(`${API_URL}/gerar-pdf-debug`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({})
