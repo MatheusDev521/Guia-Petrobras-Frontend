@@ -34,7 +34,7 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #141414, #1c1c1c);
   min-height: 100vh;
-  padding: 40px 20px;
+  padding: 27px 20px;
   color: var(--text-main);
 }
 
@@ -57,31 +57,6 @@ body {
   overflow: hidden;
   box-shadow: var(--shadow-soft);
   border: 1px solid var(--border);
-}
-
-/* =========================
-   TÍTULO
-========================= */
-.formulario h2 {
-  grid-column: 1 / -1;
-  background: none;
-  color: var(--primary);
-  padding: 0 0 14px 0;
-  margin: 25px 30px 30px 30px;
-  font-size: 32px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 15px;
-
-  border-bottom: 3px solid rgba(255, 255, 255, 0.12);
-}
-
-.formulario h2 img {
-  max-height: 65px;
 }
 
 /* =========================
@@ -167,6 +142,14 @@ body {
 /* =========================
    BOTÕES
 ========================= */
+#botoes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
 .formulario button {
   width: 40%;
   padding: 18px;
