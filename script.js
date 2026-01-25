@@ -1,5 +1,8 @@
 const API_URL = "https://guia-petrobras-backend.onrender.com";
-// Lista completa de campos
+
+/* =========================
+   CAMPOS DO FORMULÁRIO
+========================= */
 const campos = [
   "numero_guia_prestador", "numero_guia_operadora",
   "beneficiario_nome", "cns", "numero_carteira", "validade_carteira", "atendimento_rn",
@@ -9,28 +12,45 @@ const campos = [
   "codigo_procedimento", "valor_procedimento", "observacao"
 ];
 
-// Dados dos profissionais
+/* =========================
+   DADOS DOS PROFISSIONAIS
+========================= */
 const profissionais = {
   "Emília Magalhães": { crm: "10608", uf: "BA", cbo: "225165" },
   "Karla Melo":      { crm: "11469", uf: "BA", cbo: "225165" },
   "Paulo Benígno":   { crm: "9795",  uf: "BA", cbo: "225125" }
 };
 
-// Preenche dados do profissional automaticamente
-const select = document.getElementById("nome_profissional");
+/* =========================
+   LOADING (POP-UP)
+========================= */
+function mostrarLoading() {
+  document.getElementById("loadingOverlay").classList.remove("hidden");
+}
 
-select.addEventListener("change", () => {
-  const dados = profissionais[select.value];
+function esconderLoading() {
+  document.getElementById("loadingOverlay").classList.add("hidden");
+}
 
-  document.getElementById("numero_conselho").value = dados?.crm || "";
-  document.getElementById("uf_conselho").value = dados?.uf || "";
-  document.getElementById("cbo").value = dados?.cbo || "";
+/* =========================
+   AUTOPREENCHIMENTO PROFISSIONAL
+========================= */
+const selectProfissional = document.getElementById("nome_profissional");
+
+selectProfissional.addEventListener("change", () => {
+  const dados = profissionais[selectProfissional.value] || {};
+
+  document.getElementById("numero_conselho").value = dados.crm || "";
+  document.getElementById("uf_conselho").value = dados.uf || "";
+  document.getElementById("cbo").value = dados.cbo || "";
 });
 
-// Gera PDF profissional no backend
+/* =========================
+   GERAR PDF (BACKEND)
+========================= */
 async function gerarPDF() {
   const dados = {};
-  
+
   campos.forEach(id => {
     const elemento = document.getElementById(id);
     if (elemento) {
@@ -44,63 +64,80 @@ async function gerarPDF() {
     return;
   }
 
+  mostrarLoading();
+
   try {
     const response = await fetch(`${API_URL}/gerar-pdf`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dados)
     });
 
     if (!response.ok) {
       const erro = await response.json();
-      throw new Error(erro.erro || 'Erro ao gerar PDF');
+      throw new Error(erro.erro || "Erro ao gerar PDF");
     }
 
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'GUIA_CONSULTA_PREENCHIDA.pdf';
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
 
-    alert('PDF gerado com sucesso!');
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "GUIA_CONSULTA_PREENCHIDA.pdf";
+    document.body.appendChild(link);
+    link.click();
+
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(link);
+
   } catch (erro) {
-    console.error('Erro:', erro);
-    alert('Erro ao gerar PDF: ' + erro.message);
+    console.error("Erro:", erro);
+    alert("Erro ao gerar PDF: " + erro.message);
+  } finally {
+    esconderLoading();
   }
 }
 
-// Gera PDF de debug com régua
+/* =========================
+   GERAR PDF DEBUG
+========================= */
 async function gerarPDFDebug() {
+  mostrarLoading();
+
   try {
     const response = await fetch(`${API_URL}/gerar-pdf-debug`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({})
     });
 
-    if (!response.ok) throw new Error('Erro ao gerar PDF debug');
+    if (!response.ok) {
+      throw new Error("Erro ao gerar PDF debug");
+    }
 
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'GUIA_DEBUG.pdf';
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
 
-    alert('PDF debug gerado! Use-o para calibrar as coordenadas.');
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "GUIA_DEBUG.pdf";
+    document.body.appendChild(link);
+    link.click();
+
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(link);
+
   } catch (erro) {
-    console.error('Erro:', erro);
-    alert('Erro ao gerar PDF debug: ' + erro.message);
+    console.error("Erro:", erro);
+    alert("Erro ao gerar PDF debug: " + erro.message);
+  } finally {
+    esconderLoading();
   }
 }
 
+/* =========================
+   LIMPAR FORMULÁRIO
+========================= */
 const valoresIniciais = {};
 
 campos.forEach(id => {
@@ -110,18 +147,21 @@ campos.forEach(id => {
   }
 });
 
-
-// Event listeners
-document.getElementById('btnGerarPDF').addEventListener('click', gerarPDF);
-document.getElementById('btnLimpar').addEventListener('click', () => {
+function limparFormulario() {
   campos.forEach(id => {
     const elemento = document.getElementById(id);
     if (!elemento) return;
 
     if (valoresIniciais[id] !== undefined) {
-      elemento.value = valoresIniciais[id]; // restaura valor fixo
+      elemento.value = valoresIniciais[id];
     } else {
-      elemento.value = ''; // limpa campos livres
+      elemento.value = "";
     }
   });
-});
+}
+
+/* =========================
+   EVENTOS
+========================= */
+document.getElementById("btnGerarPDF").addEventListener("click", gerarPDF);
+document.getElementById("btnLimpar").addEventListener("click", limparFormulario);
