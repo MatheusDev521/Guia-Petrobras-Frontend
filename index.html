@@ -3,87 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guia Petrobras</title>
+  <title>Guia Petrobras - Gerador de PDF</title>
+  <meta name="description" content="Sistema de geração de guias Petrobras em PDF">
   <link rel="stylesheet" href="style.css">
   <script defer src="script.js"></script>
 </head>
 
 <body>
+  <div class="container">
+    <!-- FORMULÁRIO -->
+    <form class="formulario" id="formGuiaPetrobras">
 
-<div class="container">
-  <!-- FORMULÁRIO -->
-  <div class="formulario">
+      <!-- COLUNA 1: BENEFICIÁRIO E PROFISSIONAL -->
+      <div id="BeneficiarioMedico">
+        <h3>Beneficiário</h3>
+        
+        <label for="beneficiario_nome">Nome do Beneficiário:</label>
+        <input id="beneficiario_nome" type="text" placeholder="Digite o nome completo" required>
+        
+        <label for="numero_carteira">Número da Carteira:</label>
+        <input id="numero_carteira" type="text" placeholder="Ex: 123456789">
+        
+        <label for="atendimento_rn">Atendimento RN:</label>
+        <input id="atendimento_rn" type="text" value="N" maxlength="1">
 
-    <div id="BeneficiarioMedico">
-      <h3>Beneficiário</h3>
-      
-      <label for="beneficiario_nome">Nome do Beneficiário:</label>
-      <input id="beneficiario_nome">
-      
-      <label for="numero_carteira">Número da Carteira:</label>
-      <input id="numero_carteira">
-      
-      <label for="atendimento_rn">Atendimento RN:</label>
-      <input id="atendimento_rn" value="N">
-        <br><br><br>
-      <h3>Profissional</h3>
-      <label for="nome_profissional">Nome do Profissional:</label>
-      <select id="nome_profissional">
-        <option value="">Selecione...</option>
-        <option value="Emília Magalhães">Emília Magalhães</option>
-        <option value="Karla Melo">Karla Melo</option>
-        <option value="Paulo Benígno">Paulo Benígno</option>
-      </select>
+        <h3>Profissional</h3>
+        
+        <label for="nome_profissional">Nome do Profissional:</label>
+        <select id="nome_profissional" required>
+          <option value="">Selecione...</option>
+          <option value="Emília Magalhães">Emília Magalhães</option>
+          <option value="Karla Melo">Karla Melo</option>
+          <option value="Paulo Benígno">Paulo Benígno</option>
+        </select>
 
-      <label for="conselho">Conselho Profissional:</label>
-      <input id="conselho" type="text" value="CRM">
-      
-      <label for="numero_conselho">Número no Conselho:</label>
-      <input id="numero_conselho" type="number">
-      
-      <label for="uf_conselho">UF:</label>
-      <input id="uf_conselho" placeholder="Ex: BA">
-      
-      <label for="cbo">Código CBO:</label>
-      <input id="cbo">
-    </div>
-
-    <div id="AtendimentoProcedimento">
-      <h3>Atendimento</h3>
-      
-      <label for="data_atendimento">Data do Atendimento:</label>
-      <div class="date-wrapper">
-        <input id="data_atendimento" type="date">
-        <button type="button" class="btn-hoje" onclick="preencherDataHoje()">HOJE</button>
+        <label for="conselho">Conselho Profissional:</label>
+        <input id="conselho" type="text" value="CRM" readonly>
+        
+        <label for="numero_conselho">Número no Conselho:</label>
+        <input id="numero_conselho" type="number" placeholder="Ex: 10608">
+        
+        <label for="uf_conselho">UF:</label>
+        <input id="uf_conselho" type="text" placeholder="Ex: BA" maxlength="2">
+        
+        <label for="cbo">Código CBO:</label>
+        <input id="cbo" type="text" placeholder="Ex: 225165">
       </div>
 
-      <label for="indicacao_acidente">Indicação de Acidente:</label>
-      <input id="indicacao_acidente" value="N">
-      
-      <label for="tabela">Tabela:</label>
-      <input id="tabela" value="TUSS">
-      
-      <label for="codigo_procedimento">Código do Procedimento:</label>
-      <input id="codigo_procedimento" value="10101012">
-      
-      <label for="valor_procedimento">Valor do Procedimento:</label>
-      <input id="valor_procedimento" value="R$ 112 00">
-        <br><br><br>
-      <h3>Observações</h3>
-      <label for="observacao">Observação/Justificativa:</label>
-      <textarea id="observacao" rows="4"></textarea>
-      <div id="botoes">
-        <button id="btnGerarPDF" class="btn-gerar">GERAR GUIA PDF</button>
-        <button id="btnLimpar" class="btn-limpar">LIMPAR TUDO</button>
+      <!-- COLUNA 2: ATENDIMENTO E PROCEDIMENTO -->
+      <div id="AtendimentoProcedimento">
+        <h3>Atendimento</h3>
+        
+        <label for="data_atendimento">Data do Atendimento:</label>
+        <div class="date-wrapper">
+          <input id="data_atendimento" type="date" required>
+          <button type="button" class="btn-hoje" onclick="preencherDataHoje()" aria-label="Preencher data de hoje">HOJE</button>
+        </div>
+
+        <label for="indicacao_acidente">Indicação de Acidente:</label>
+        <input id="indicacao_acidente" type="text" value="N" maxlength="1">
+        
+        <label for="tabela">Tabela:</label>
+        <input id="tabela" type="text" value="TUSS" readonly>
+        
+        <label for="codigo_procedimento">Código do Procedimento:</label>
+        <input id="codigo_procedimento" type="text" value="10101012">
+        
+        <label for="valor_procedimento">Valor do Procedimento:</label>
+        <input id="valor_procedimento" type="text" value="R$ 112 00">
+
+        <h3>Observações</h3>
+        
+        <label for="observacao">Observação/Justificativa:</label>
+        <textarea id="observacao" rows="4" placeholder="Digite observações sobre o atendimento..."></textarea>
+        
+        <div id="botoes">
+          <button type="button" id="btnGerarPDF" class="btn-gerar">GERAR GUIA PDF</button>
+          <button type="button" id="btnLimpar" class="btn-limpar">LIMPAR TUDO</button>
+        </div>
       </div>
+
+    </form>
+  </div>
+
+  <div id="loadingOverlay" class="loading-overlay hidden" role="status" aria-live="polite">
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <p>Gerando PDF, aguarde...</p>
     </div>
   </div>
-</div>
-<div id="loadingOverlay" class="loading-overlay hidden">
-  <div class="loading-box">
-    <div class="spinner"></div>
-    <p>Gerando PDF, aguarde...</p>
-  </div>
-</div>
+
 </body>
 </html>
