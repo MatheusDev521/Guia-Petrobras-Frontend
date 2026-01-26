@@ -46,6 +46,38 @@ selectProfissional.addEventListener("change", () => {
 });
 
 /* =========================
+   PREENCHER DATA HOJE
+========================= */
+function preencherDataHoje() {
+  const inputData = document.getElementById('data_atendimento');
+  const hoje = new Date();
+  
+  // Formata a data no padrão YYYY-MM-DD (necessário para input type="date")
+  const ano = hoje.getFullYear();
+  const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+  const dia = String(hoje.getDate()).padStart(2, '0');
+  
+  const dataFormatada = `${ano}-${mes}-${dia}`;
+  
+  // Preenche o input
+  inputData.value = dataFormatada;
+  
+  // Adiciona efeito visual de feedback
+  const btnHoje = document.querySelector('.btn-hoje');
+  if (btnHoje) {
+    btnHoje.classList.add('clicked');
+    
+    // Remove a classe após a animação
+    setTimeout(() => {
+      btnHoje.classList.remove('clicked');
+    }, 400);
+  }
+  
+  // Foca no input para mostrar que foi preenchido
+  inputData.focus();
+}
+
+/* =========================
    GERAR PDF (BACKEND)
 ========================= */
 async function gerarPDF() {

@@ -52,7 +52,10 @@
       <h3>Atendimento</h3>
       
       <label for="data_atendimento">Data do Atendimento:</label>
-      <input id="data_atendimento" type="date">
+      <div class="date-wrapper">
+        <input id="data_atendimento" type="date">
+        <button type="button" class="btn-hoje" onclick="preencherDataHoje()">HOJE</button>
+      </div>
 
       <label for="indicacao_acidente">Indicação de Acidente:</label>
       <input id="indicacao_acidente" value="N">
